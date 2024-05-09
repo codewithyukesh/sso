@@ -100,3 +100,274 @@
   font-size: 18px;
   line-height: 1.6;
 }
+/* // sidebar  */
+.sidebar {
+  position: fixed;
+  top: 60px; /* Height of the header */
+  bottom: 60px; /* Height of the footer */
+  left: 0;
+  width: 15%; /* Sidebar takes up 15% of the width */
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  overflow-y: auto;
+  z-index: 1; /* Ensure sidebar stays above other content */
+
+}
+  
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.name {
+  font-size: 18px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.menu-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.menu-list li {
+  margin-bottom: 10px;
+}
+
+.menu-list li:hover {
+  cursor: pointer;
+ }
+
+.menu-list a {
+  color: white;
+  text-decoration: none; /* Remove underlines */
+}
+
+/* Remove underline on hover */
+.menu-list a:hover {
+  text-decoration: none;
+}
+
+/* Remove outline on focus */
+.menu-list a:focus {
+  outline: none;
+}
+
+/* Optionally, remove any click effects */
+.menu-list a:active {
+  outline: none;
+}
+/* // header  */
+.header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: #007bff;
+  color: #fff;
+  padding: 20px;
+ 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header .right {
+  display: flex;
+  align-items: center;
+  padding-right: 3%;
+}
+
+.header .right > * {
+  margin-left:20px;
+ /* padding-right: 20px; */
+  color: #fff;
+  text-decoration: none;
+}
+
+.header .right .logout {
+  cursor: pointer;
+ 
+}
+
+
+/* footer  */
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #0044ff;
+  color: #ffffff;
+  padding: 20px;
+  text-align: center;
+}
+
+
+/* main content */
+.main-content {
+  position: fixed;
+  top: 60px; /* Height of the header */
+  bottom: 60px; /* Height of the footer */
+  left: 15%; /* Set margin of 15% on the left */
+  width: 85%; /* Main content takes up 85% of the width */
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Align items to the center */
+}
+
+.card {
+  width: calc(16.66% - 20px); /* Each row will display 6 cards */
+  margin-bottom: 18px;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: transparent; /* Remove card background color */
+  border: none; /* Remove card border */
+  text-align: center; /* Center text */
+   
+}
+.card link {
+  text-decoration: none;
+}
+.icon {
+  width: auto; /* Adjust icon size as needed */
+  height: auto;
+   display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px; /* Adjust icon size as needed */
+   
+}
+ 
+
+.title {
+  font-size: 18px;
+  margin: 0;
+  color: black; /* Set text color to black */
+  text-decoration: none; /* Ensure no underline on hover */
+
+ }
+
+.title:hover {
+  text-decoration: none; /* Ensure no underline on hover */
+}
+
+
+/* login */
+ /* Login.css */
+.login-container {
+  width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.btn {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}
+
+ /* signup css */
+.signup-container {
+  width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.btn {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}
+/* RegistrationNew.css */
+.registration-new {
+  max-width: 800px; /* Adjust as needed */
+  margin: 0 auto;
+  padding-top: 3%;
+
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.form-group {
+  flex: 1 1 300px; /* Adjust width as needed */
+  margin-right: 20px; /* Adjust spacing between fields */
+  margin-bottom: 10px; /* Adjust vertical spacing between rows */
+}
+
+.form-group:last-child {
+  margin-right: 0;
+}
+
+@media (max-width: 768px) {
+  .form-group {
+    flex: 1 1 100%; /* Make fields full width on smaller screens */
+    margin-right: 0;
+  }
+}

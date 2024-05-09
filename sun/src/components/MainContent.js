@@ -1,5 +1,5 @@
 import React from 'react';
- 
+
 function MainContent() {
   // Sample data for cards
   const cardsData = [
@@ -23,11 +23,36 @@ function MainContent() {
     { id: 18, title: 'Digital Home-Mapping System', link: '#' },
   ];
 
+  // Function to get user token from localStorage
+  const getToken = () => {
+    return localStorage.getItem('token');
+  };
+
+  // Function to get user data from localStorage
+  const getUserData = () => {
+    return {
+      name: localStorage.getItem('name'),
+      email: localStorage.getItem('email'),
+      role: localStorage.getItem('role')
+    };
+  };
+
+  // Function to construct link with token and user data
+  const constructLink = (link) => {
+    const token = getToken();
+    const userData = getUserData();
+    const queryParams = new URLSearchParams({
+      token: token,
+      ...userData
+    }).toString();
+    return `${link}?${queryParams}`;
+  };
+
   return (
     <div className="main-content">
       {cardsData.map(card => (
         <div key={card.id} className="card">
-          <a href={card.link}>
+          <a href={card.id === 2 ? constructLink(card.link) : card.link}>
             <div className="icon">✅</div>
             <h3 className="title">{card.title}</h3>
           </a>
