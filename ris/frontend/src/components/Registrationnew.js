@@ -30,7 +30,7 @@ const RegistrationNew = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:5000/api/registration', {
+      const response = await fetch('http://localhost:5001/registrations', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

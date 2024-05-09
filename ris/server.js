@@ -1,8 +1,10 @@
+// Import necessary modules
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const app = express();
-const PORT = process.env.PORT || 6000;
+const cors = require('cors'); 
+const PORT = process.env.PORT || 5001;
 
 // MongoDB connection setup
 mongoose.connect('mongodb://localhost:27017/sun', {
@@ -17,8 +19,40 @@ const userSchema = new mongoose.Schema({
 });
 const User = mongoose.model('User', userSchema);
 
+// Registration schema and model
+const registrationSchema = new mongoose.Schema({
+     registrationDate: String,
+    dispatchNo: String,
+    refNo: String,
+    letterDate: String,
+    sendersName: String,
+    sendersAddress: String,
+    subject: String,
+    relevantSection: String,
+    file: String,
+    remarks: String
+});
+const Registration = mongoose.model('Registration', registrationSchema);
+
 // Middleware
+app.use(cors({ origin: 'http://localhost:3001' }));
+
 app.use(express.json());
+
+
+app.get('/registrations', async (req, res) => {
+    try {
+        // Fetch registrations data from the database
+        const registrations = await Registration.find();
+
+        // Send registrations data as response
+        res.status(200).json(registrations);
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
 
 // Middleware to verify JWT token
 const verifyToken = (req, res, next) => {
@@ -37,20 +71,37 @@ const verifyToken = (req, res, next) => {
 
 // Route for user login
 app.post('http://localhost:5000/signin', async (req, res) => {
+    // Your existing login route
+});
+
+// Route for saving registration data
+app.post('/registrations', async (req, res) => {
     try {
-        const { email, password } = req.body;
-        // Find the user by email
-        const user = await User.findOne({ email, password });
-        if (!user) {
-            return res.status(404).json({ message: 'User not found' });
-        }
-        // Generate JWT token upon successful authentication
-        const token = jwt.sign({ userId: user.id, email: user.email, role: user.role }, 'my_secret_key', { expiresIn: '1h' });
-        // Send the generated JWT token back to the client as part of the response
-        res.status(200).json({ message: 'User logged in successfully', token });
+        // Extract registration data from the request body
+        const { registrationDate, dispatchNo, refNo, letterDate, sendersName, sendersAddress, subject, relevantSection, file, remarks } = req.body;
+
+        // Create a new instance of the Registration model
+        const newRegistration = new Registration({
+            registrationDate,
+            dispatchNo,
+            refNo,
+            letterDate,
+            sendersName,
+            sendersAddress,
+            subject,
+            relevantSection,
+            file,
+            remarks
+        });
+
+        // Save the registration data to the database
+        await newRegistration.save();
+
+        // Send a success response
+        res.status(201).json({ message: 'Registration data saved successfully' });
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Internal server error' });
+        console.error('Error:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 });
 
