@@ -34,6 +34,20 @@ const registrationSchema = new mongoose.Schema({
 });
 const Registration = mongoose.model('Registration', registrationSchema);
 
+const invoiceSchema = new mongoose.Schema({
+    invoiceNo: Number,
+    date: String,
+    letterNo: String,
+    receiversName: String,
+    address: String,
+    subject: String,
+    meansOfSending: { type: String, enum: ['hardcopy', 'email', 'post office'] },
+    correspondingBranch: String,
+    file: String,
+    remarks: String
+});
+const Invoice = mongoose.model('Invoice', invoiceSchema);
+
 // Middleware
 app.use(cors({ origin: 'http://localhost:3001' }));
 
@@ -104,6 +118,59 @@ app.post('/registrations', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+
+// Route for saving invoice data
+app.post('/invoices', async (req, res) => {
+    try {
+        // Fetch the last invoice number from the database
+        const lastInvoice = await Invoice.findOne().sort({ invoiceNo: -1 });
+
+        // Generate new invoice number
+        const newInvoiceNo = lastInvoice ? lastInvoice.invoiceNo + 1 : 1;
+
+        // Extract invoice data from the request body
+        const { date, letterNo, receiversName, address, subject, meansOfSending, correspondingBranch, file, remarks } = req.body;
+
+        // Create a new instance of the Invoice model
+        const newInvoice = new Invoice({
+            invoiceNo: newInvoiceNo,
+            date,
+            letterNo,
+            receiversName,
+            address,
+            subject,
+            meansOfSending,
+            correspondingBranch,
+            file,
+            remarks
+        });
+
+        // Save the invoice data to the database
+        await newInvoice.save();
+
+        // Send a success response
+        res.status(201).json({ message: 'Invoice data saved successfully', invoiceNo: newInvoiceNo });
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+// Route for retrieving all invoices
+app.get('/invoices', async (req, res) => {
+    try {
+        // Fetch invoices data from the database
+        const invoices = await Invoice.find();
+
+        // Send invoices data as response
+        res.status(200).json(invoices);
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+
 
 // Protected route (requires JWT token)
 app.get('/protected', verifyToken, (req, res) => {

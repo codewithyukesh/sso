@@ -1,7 +1,7 @@
 // HomePage.js
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import MainContent from './MainContent';
+import Dashboard from './Dashboard';
 import Registrationnew from './Registrationnew';
 import Invoicenew from './Invoicenew';
 import Report from './Report';
@@ -17,7 +17,7 @@ const HomePage = () => {
       <div className="container">
         <Sidebar />
         <Routes>
-          <Route path="/" element={<MainContent />} />
+          <Route path="/" element={<Dashboard />} />
           <Route path="/registrationnew" element={<Registrationnew />} />
           <Route path="/invoicenew" element={<Invoicenew />} />
           <Route path="/report" element={<Report />} />

@@ -8,7 +8,7 @@ import Invoicenew from './components/Invoicenew';
 import Invoicestats from './components/Invoicestats';
 import Support from './components/Support';
 import Report from './components/Report';
-
+ 
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 function App() {

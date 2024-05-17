@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
 import Sidebar from './Sidebar';
- 
+
 function Registrationstats() {
   const [registrations, setRegistrations] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -25,19 +25,29 @@ function Registrationstats() {
   // Change page
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
+ 
+  const handleDelete = (id) => {
+    // Filter out the registration with the provided ID
+    const updatedRegistrations = registrations.filter(registration => registration.id !== id);
+    // Update the state with the filtered registrations
+    setRegistrations(updatedRegistrations);
+    // Implement logic to send delete request to API
+    console.log('Deleting registration with ID:', id);
+  }
+
   return (
     <div>
       <Header />
       <div className="container">
         <Sidebar />
-        <div className="registration-container"> {/* Add class name here */}
+        <div className="registration-container">
           <h2>Registration Stats:</h2>
-          <Link to="/registrationnew" className="new-registration-btn"> {/* Use Link here */}
+          <Link to="/registrationnew" className="new-registration-btn">
             New Registration
           </Link>
-          <br /> <br></br>
+          <br /><br />
           
-          <table className="registration-table"> {/* Add class name here */}
+          <table className="registration-table">
             <thead>
               <tr>
                 <th>Registration No.</th>
@@ -50,6 +60,7 @@ function Registrationstats() {
                 <th>Subject</th>
                 <th>Relevant Section</th>
                 <th>Remarks</th>
+                <th>Actions</th> {/* New column for actions */}
               </tr>
             </thead>
             <tbody>
@@ -65,12 +76,23 @@ function Registrationstats() {
                   <td>{registration.subject}</td>
                   <td>{registration.relevantSection}</td>
                   <td>{registration.remarks}</td>
+                  <td>
+                    <Link to={`/registrationview/${registration.id}`} className="view-registration-btn">
+                      View
+                    </Link>
+                    <Link to={`/registrationedit/${registration.id}`} className="edit-registration-btn">
+                      Edit
+                    </Link>
+                    <button onClick={() => handleDelete(registration.id)} className="delete-registration-btn">
+                      Delete
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
           {/* Pagination */}
-          <div className="pagination"> {/* Add class name here */}
+          <div className="pagination">
             {Array.from({ length: Math.ceil(registrations.length / registrationsPerPage) }).map((_, index) => (
               <button key={index} onClick={() => paginate(index + 1)}>
                 {index + 1}

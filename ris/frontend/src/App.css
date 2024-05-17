@@ -426,3 +426,269 @@
 .pagination button:hover {
   background-color: #0056b3;
 }
+
+
+.support-container {
+  padding-left: 18%;
+  padding-top: 3%;
+  padding-right: 1%;
+}
+
+.support-content {
+ 
+  flex: 1;
+  padding: 20px;
+}
+
+.support-stats {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.support-stat {
+  flex: 1;
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+}
+
+.support-info {
+  border-top: 1px solid #ccc;
+  padding-top: 20px;
+}
+
+/* Add more CSS styling as needed */
+.invoice-container {
+  padding-left: 18%;
+  padding-top: 3%;
+  padding-right: 1%;
+
+}
+
+.invoice-content {
+  flex: 1;
+  padding: 20px;
+}
+
+.invoice-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.invoice-label {
+  margin-top: 10px;
+}
+
+.invoice-input[type="date"],
+.invoice-input[type="text"],
+.invoice-select,
+.invoice-textarea {
+  margin-top: 5px;
+  padding: 8px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.invoice-textarea {
+  height: 100px;
+}
+
+.invoice-submit[type="submit"] {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.invoice-submit[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+
+/* dashboard css */
+.dashboard-container {
+  padding-left: 18%;
+  padding-top: 3%;
+  padding-right: 1%;
+
+} 
+ 
+.dashboard-summary {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.summary-card {
+  background-color: #4d4c4c;
+  padding: 20px;
+  border-radius: 8px;
+  width: 45%;
+  text-align: center;
+  color: white;
+}
+
+.view-details-btn {
+  margin-top: 10px;
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.dashboard-charts {
+  margin-top: 20px;
+}
+
+/* report css  */
+.report-container {
+  padding-left: 18%;
+  padding-top: 3%;
+  padding-right: 1%;
+ }
+
+/* Buttons */
+.report-buttons {
+  margin-bottom: 20px;
+}
+
+.report-buttons button {
+  margin-right: 10px;
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.report-buttons button.active {
+  background-color: #0056b3;
+}
+
+/* Count Cards */
+.count-cards {
+  display: flex;
+  justify-content: space-evenly;
+ }
+
+.count-card {
+  margin: 10px;
+  padding: 10px;
+  background-color: #2d3033;
+  border-radius: 4px;
+  color: white;
+}
+
+/* Date Filter */
+.date-filter {
+  margin-top: 20px;
+}
+
+.date-filter input {
+  margin-right: 10px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.date-filter input:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+/* Report Table */
+.report-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.report-table th,
+.report-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.report-table th {
+  background-color: #f2f2f2;
+}
+
+.report-table td {
+  text-align: center;
+}
+
+/* Pagination */
+.pagination {
+  margin-top: 20px;
+}
+
+.pagination button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  margin-right: 5px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.pagination button:hover {
+  background-color: #0056b3;
+}
+
+.new-registration-btn,
+.view-registration-btn,
+.edit-registration-btn,
+.delete-registration-btn {
+  display: inline-block;
+  padding: 4px 10px;
+  margin-right: 2px;
+  font-size: 12px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.view-registration-btn {
+  background-color: #28a745;
+}
+
+.edit-registration-btn {
+  background-color: #ffc107;
+}
+
+.delete-registration-btn {
+  background-color: #dc3545;
+}
+
+.pagination {
+  margin-top: 20px;
+}
+
+.pagination button {
+  margin-right: 5px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 6px 12px;
+  font-size: 14px;
+}
+
+.pagination button:hover {
+  background-color: #0056b3;
+}
