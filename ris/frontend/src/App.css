@@ -104,7 +104,7 @@
 .sidebar {
   position: fixed;
   top: 60px; /* Height of the header */
-  bottom: 60px; /* Height of the footer */
+  bottom: 40px; /* Height of the footer */
   left: 0;
   width: 15%; /* Sidebar takes up 15% of the width */
   background-color: #333;
@@ -202,7 +202,7 @@
   width: 100%;
   background-color: #0044ff;
   color: #ffffff;
-  padding: 20px;
+  padding: 10px;
   text-align: center;
 }
 
@@ -278,7 +278,12 @@
   font-weight: bold;
   margin-bottom: 5px;
 }
-
+.form-group select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
 .form-group input {
   width: 100%;
   padding: 10px;
@@ -342,121 +347,6 @@
 .btn:hover {
   background-color: #0056b3;
 }
-/* RegistrationNew.css */
-.registration-new {
-  max-width: 800px; /* Adjust as needed */
-  margin: 0 auto;
-  padding-top: 3%;
-
-}
-
-.form-row {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.form-group {
-  flex: 1 1 300px; /* Adjust width as needed */
-  margin-right: 20px; /* Adjust spacing between fields */
-  margin-bottom: 10px; /* Adjust vertical spacing between rows */
-}
-
-.form-group:last-child {
-  margin-right: 0;
-}
-
-@media (max-width: 768px) {
-  .form-group {
-    flex: 1 1 100%; /* Make fields full width on smaller screens */
-    margin-right: 0;
-  }
-}
-/* registration stats */
-.registration-container {
-  padding-left: 18%;
-  padding-top: 3%;
-  padding-right: 1%;
-}
-.registration-container a {
-  text-decoration: none;
-}
-
-.new-registration-btn {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.new-registration-btn:hover {
-  background-color: #0056b3;
-}
-
-.registration-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.registration-table th,
-.registration-table td {
-  padding: 8px;
-  border: 1px solid #ddd;
-  text-align: left;
-}
-
-.registration-table th {
-  background-color: #f2f2f2;
-}
-
-.pagination {
-  margin-top: 20px;
-}
-
-.pagination button {
-  margin-right: 5px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.pagination button:hover {
-  background-color: #0056b3;
-}
-
-
-.support-container {
-  padding-left: 18%;
-  padding-top: 3%;
-  padding-right: 1%;
-}
-
-.support-content {
- 
-  flex: 1;
-  padding: 20px;
-}
-
-.support-stats {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-
-.support-stat {
-  flex: 1;
-  border: 1px solid #ccc;
-  padding: 10px;
-  text-align: center;
-}
-
-.support-info {
-  border-top: 1px solid #ccc;
-  padding-top: 20px;
-}
 
 /* Add more CSS styling as needed */
 .invoice-container {
@@ -511,50 +401,68 @@
   background-color: #0056b3;
 }
 
-
-/* dashboard css */
-.dashboard-container {
-  padding-left: 18%;
-  padding-top: 3%;
-  padding-right: 1%;
-
-} 
- 
-.dashboard-summary {
+/* Dashboard summary styling */
+.container {
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
+  flex-direction: column;
+  align-items: center;
 }
 
-.summary-card {
-  background-color: #4d4c4c;
-  padding: 20px;
-  border-radius: 8px;
-  width: 45%;
-  text-align: center;
-  color: white;
-}
-
-.view-details-btn {
-  margin-top: 10px;
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
-  border-radius: 5px;
-  text-decoration: none;
-}
-
-.dashboard-charts {
-  margin-top: 20px;
-}
-
-/* report css  */
-.report-container {
-  padding-left: 18%;
+.dashboard-container {
+  flex: 1;
+  /* padding: 20px; */
+  /* width: 80%; */
+  /* padding-left: 18%;
   padding-top: 3%;
-  padding-right: 1%;
+  padding-right: 1%; */
+  /* text-align: left;   */
+}
+.report-container {
+   
+  width: 80%;  
+    padding-left: 18%; 
+  padding-top: 3%;
+   padding-right: 1%; 
+  
+
+}
+.card {
+  background-color: #f2f2f2;
+  width: 500px;
+  margin: 50px auto; /* Center the card horizontally */
+  padding: 20px;
+  margin-left: 30%;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
  }
+
+.card h3 {
+  margin: 0;
+  font-size: 24px;
+  color: #333;
+}
+
+.card p {
+  margin: 10px 0;
+  font-size: 20px;
+  color: #666;
+}
+
+.view-link {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.view-link:hover {
+  background-color: #0056b3;
+}
 
 /* Buttons */
 .report-buttons {
@@ -691,4 +599,252 @@
 
 .pagination button:hover {
   background-color: #0056b3;
+}
+
+/* Popup Styles */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.popup-content p {
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+.popup-content button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.popup-content button:hover {
+  background-color: #45a049;
+}
+
+ 
+
+/* Container and Layout */
+.container {
+  padding-left: 18%;
+  padding-top: 3%;
+  padding-right: 1%;
+
+  display: flex;
+  flex-direction: row;
+}
+
+.registration-new {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+/* Form Styles */
+.form-row {
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.form-group {
+  margin-right: 20px;
+  flex: 1;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.submit-btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.submit-btn:hover {
+  background-color: #45a049;
+}
+
+/* Popup Styles */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.popup-content p {
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+.popup-content button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.popup-content button:hover {
+  background-color: #45a049;
+}
+
+/* Error Styles */
+.error {
+  color: red;
+  margin-top: 5px;
+  font-size: 14px;
+}
+/* support css */
+
+.support-container {
+  padding-left: 18%;
+  padding-top: 3%;
+  padding-right: 1%;
+}
+
+.support-content {
+ 
+  flex: 1;
+  padding: 20px;
+}
+
+.support-stats {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.support-stat {
+  flex: 1;
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+}
+
+.support-info {
+  border-top: 1px solid #ccc;
+  padding-top: 20px;
+}
+
+
+/* registration stats css */
+.registration-container {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+.new-registration-btn {
+  display: inline-block;
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.new-registration-btn:hover {
+  background-color: #45a049;
+}
+
+/* Table Styles */
+.registration-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.registration-table th, .registration-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.registration-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.registration-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.registration-table tr:hover {
+  background-color: #ddd;
+}
+
+/* Button Styles */
+.delete-registration-btn {
+  background-color: #f44336;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.delete-registration-btn:hover {
+  background-color: #d32f2f;
+}
+
+/* Pagination Styles */
+.pagination {
+  margin-top: 10px;
+  margin-bottom: 25px;
+}
+
+.pagination button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  margin: 0 5px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.pagination button:hover {
+  background-color: #45a049;
 }

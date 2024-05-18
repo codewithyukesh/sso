@@ -1,4 +1,3 @@
-// Import necessary modules
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
@@ -67,6 +66,21 @@ app.get('/registrations', async (req, res) => {
     }
 });
 
+// DELETE route for deleting a registration
+app.delete('/registrations/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const result = await Registration.findByIdAndDelete(id);
+        if (!result) {
+            return res.status(404).json({ message: 'Registration not found' });
+        }
+        res.status(200).json({ message: 'Registration deleted successfully' });
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
 
 // Middleware to verify JWT token
 const verifyToken = (req, res, next) => {
@@ -79,13 +93,13 @@ const verifyToken = (req, res, next) => {
             return res.status(401).json({ message: 'Invalid token' });
         }
         req.user = decoded;
-        next(); // Move to the next middleware
+        next();  
     });
 };
 
 // Route for user login
 app.post('http://localhost:5000/signin', async (req, res) => {
-    // Your existing login route
+     
 });
 
 // Route for saving registration data
@@ -170,7 +184,20 @@ app.get('/invoices', async (req, res) => {
     }
 });
 
-
+// DELETE route for deleting an invoice
+app.delete('/invoices/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const result = await Invoice.findByIdAndDelete(id);
+        if (!result) {
+            return res.status(404).json({ message: 'Invoice not found' });
+        }
+        res.status(200).json({ message: 'Invoice deleted successfully' });
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 
 // Protected route (requires JWT token)
 app.get('/protected', verifyToken, (req, res) => {

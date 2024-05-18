@@ -3,37 +3,49 @@ import { Link } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
 import Sidebar from './Sidebar';
+import Popup from './Popup';
 
 function Registrationstats() {
   const [registrations, setRegistrations] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [registrationsPerPage] = useState(10); // Change this value to adjust the number of registrations per page
+  const [registrationsPerPage] = useState(10);
+  const [popupMessage, setPopupMessage] = useState(null);
 
   useEffect(() => {
-    // Fetch data from the API
     fetch('http://localhost:5001/registrations')
       .then(response => response.json())
       .then(data => setRegistrations(data))
       .catch(error => console.error('Error fetching data:', error));
-  }, []); // Empty dependency array ensures useEffect runs only once after initial render
+  }, []);
 
-  // Calculate indexes for pagination
   const indexOfLastRegistration = currentPage * registrationsPerPage;
   const indexOfFirstRegistration = indexOfLastRegistration - registrationsPerPage;
   const currentRegistrations = registrations.slice(indexOfFirstRegistration, indexOfLastRegistration);
 
-  // Change page
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
- 
-  const handleDelete = (id) => {
-    // Filter out the registration with the provided ID
-    const updatedRegistrations = registrations.filter(registration => registration.id !== id);
-    // Update the state with the filtered registrations
-    setRegistrations(updatedRegistrations);
-    // Implement logic to send delete request to API
-    console.log('Deleting registration with ID:', id);
-  }
+  const handleDelete = async (_id) => {
+    try {
+      const response = await fetch(`http://localhost:5001/registrations/${_id}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to delete registration');
+      }
+
+      const updatedRegistrations = registrations.filter(registration => registration._id !== _id);
+      setRegistrations(updatedRegistrations);
+      setPopupMessage('Registration data has deleted successfully');
+    } catch (error) {
+      console.error('Error deleting registration data:', error);
+      setPopupMessage('Failed to delete registration data');
+    }
+  };
+
+  const closePopup = () => {
+    setPopupMessage(null);
+  };
 
   return (
     <div>
@@ -60,13 +72,13 @@ function Registrationstats() {
                 <th>Subject</th>
                 <th>Relevant Section</th>
                 <th>Remarks</th>
-                <th>Actions</th> {/* New column for actions */}
+                <th>Actions</th>  
               </tr>
             </thead>
             <tbody>
               {currentRegistrations.map((registration, index) => (
-                <tr key={registration.id}>
-                  <td>{indexOfFirstRegistration + index + 1}</td> {/* Add the registration number */}
+                <tr key={registration._id}>
+                  <td>{indexOfFirstRegistration + index + 1}</td>  
                   <td>{registration.registrationDate}</td>
                   <td>{registration.dispatchNo}</td>
                   <td>{registration.refNo}</td>
@@ -77,13 +89,7 @@ function Registrationstats() {
                   <td>{registration.relevantSection}</td>
                   <td>{registration.remarks}</td>
                   <td>
-                    <Link to={`/registrationview/${registration.id}`} className="view-registration-btn">
-                      View
-                    </Link>
-                    <Link to={`/registrationedit/${registration.id}`} className="edit-registration-btn">
-                      Edit
-                    </Link>
-                    <button onClick={() => handleDelete(registration.id)} className="delete-registration-btn">
+                    <button onClick={() => handleDelete(registration._id)} className="delete-registration-btn">
                       Delete
                     </button>
                   </td>
@@ -91,7 +97,6 @@ function Registrationstats() {
               ))}
             </tbody>
           </table>
-          {/* Pagination */}
           <div className="pagination">
             {Array.from({ length: Math.ceil(registrations.length / registrationsPerPage) }).map((_, index) => (
               <button key={index} onClick={() => paginate(index + 1)}>
@@ -102,6 +107,7 @@ function Registrationstats() {
         </div>
       </div>
       <Footer />
+      {popupMessage && <Popup message={popupMessage} onClose={closePopup} />}
     </div>
   );
 }

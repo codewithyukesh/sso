@@ -7,21 +7,22 @@ function InvoiceNew() {
   const [invoiceCount, setInvoiceCount] = useState(0);
   const [nextInvoiceNo, setNextInvoiceNo] = useState(0);
   const [showPopup, setShowPopup] = useState(false);
+  const [errors, setErrors] = useState({});
+
+  const fetchInvoiceCount = async () => {
+    try {
+      const response = await fetch('http://localhost:5001/invoices');
+      if (!response.ok) {
+        throw new Error('Failed to fetch invoices');
+      }
+      const invoices = await response.json();
+      setInvoiceCount(invoices.length);
+    } catch (error) {
+      console.error('Error fetching invoices:', error);
+    }
+  };
 
   useEffect(() => {
-    const fetchInvoiceCount = async () => {
-      try {
-        const response = await fetch('http://localhost:5001/invoices');
-        if (!response.ok) {
-          throw new Error('Failed to fetch invoices');
-        }
-        const invoices = await response.json();
-        setInvoiceCount(invoices.length);
-      } catch (error) {
-        console.error('Error fetching invoices:', error);
-      }
-    };
-
     fetchInvoiceCount();
   }, []);
 
@@ -37,27 +38,57 @@ function InvoiceNew() {
     subject: '',
     meansOfSending: '',
     correspondingBranch: '',
-    attachment: '',
+    attachment: null,
     remarks: ''
   });
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, files } = e.target;
     setFormData(prevState => ({
       ...prevState,
-      [name]: value
+      [name]: type === 'file' ? files[0] : value
     }));
+    setErrors(prevErrors => ({
+      ...prevErrors,
+      [name]: '' // Clear error message for the field being edited
+    }));
+  };
+
+  const validateFields = () => {
+    const newErrors = {};
+    const requiredFields = [
+      'date', 'letterNo', 'receiversName', 'address', 
+      'subject', 'meansOfSending', 'correspondingBranch'
+    ];
+
+    requiredFields.forEach(field => {
+      if (!formData[field].trim()) {
+        newErrors[field] = 'This field is required and cannot be just spaces';
+      }
+    });
+
+    return newErrors;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const validationErrors = validateFields();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+
+    // Prepare form data
+    const formDataToSend = new FormData();
+    Object.keys(formData).forEach(key => {
+      formDataToSend.append(key, formData[key]);
+    });
+
     try {
       const response = await fetch('http://localhost:5001/invoices', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
+        body: formDataToSend,
       });
 
       if (!response.ok) {
@@ -71,9 +102,24 @@ function InvoiceNew() {
     }
   };
 
-  const handlePopupClose = () => {
+  const handlePopupClose = async () => {
     setShowPopup(false);
-    // Optionally, you can reset the form fields here
+    setFormData({
+      date: '',
+      letterNo: '',
+      receiversName: '',
+      address: '',
+      subject: '',
+      meansOfSending: '',
+      correspondingBranch: '',
+      attachment: null,
+      remarks: ''
+    });
+    setErrors({});
+
+    // Fetch the updated invoice count
+    await fetchInvoiceCount();
+    setNextInvoiceNo(invoiceCount + 1);
   };
 
   return (
@@ -92,24 +138,29 @@ function InvoiceNew() {
               <div className="form-group col">
                 <label>Date:</label>
                 <input type="date" name="date" value={formData.date} onChange={handleChange} />
+                {errors.date && <span className="error">{errors.date}</span>}
               </div>
               <div className="form-group col">
                 <label>Letter No:</label>
                 <input type="text" name="letterNo" value={formData.letterNo} onChange={handleChange} />
+                {errors.letterNo && <span className="error">{errors.letterNo}</span>}
               </div>
               <div className="form-group col">
                 <label>Receiver's Name:</label>
                 <input type="text" name="receiversName" value={formData.receiversName} onChange={handleChange} />
+                {errors.receiversName && <span className="error">{errors.receiversName}</span>}
               </div>
             </div>
             <div className="form-row">
               <div className="form-group col">
                 <label>Address:</label>
                 <textarea name="address" value={formData.address} onChange={handleChange}></textarea>
+                {errors.address && <span className="error">{errors.address}</span>}
               </div>
               <div className="form-group col">
                 <label>Subject:</label>
                 <input type="text" name="subject" value={formData.subject} onChange={handleChange} />
+                {errors.subject && <span className="error">{errors.subject}</span>}
               </div>
               <div className="form-group col">
                 <label>Means of Sending:</label>
@@ -119,12 +170,14 @@ function InvoiceNew() {
                   <option value="email">Email</option>
                   <option value="post office">Post Office</option>
                 </select>
+                {errors.meansOfSending && <span className="error">{errors.meansOfSending}</span>}
               </div>
             </div>
             <div className="form-row">
               <div className="form-group col">
                 <label>Corresponding Branch:</label>
                 <input type="text" name="correspondingBranch" value={formData.correspondingBranch} onChange={handleChange} />
+                {errors.correspondingBranch && <span className="error">{errors.correspondingBranch}</span>}
               </div>
               <div className="form-group col">
                 <label>Add Attachment:</label>
